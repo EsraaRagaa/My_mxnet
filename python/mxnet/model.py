@@ -123,7 +123,7 @@ def _train_multi_device(symbol, ctx, arg_names, param_names, aux_names,
                         train_data, eval_data=None, eval_metric=None,
                         epoch_end_callback=None, batch_end_callback=None,
                         logger=None, work_load_list=None, monitor=None,
-                        eval_batch_end_callback=None, sym_gen=None):
+                        eval_batch_end_callback=None, sym_gen=None, group2ctx=None):
     """Internal training function on multiple devices.
     This function will also work for single device as well.
     Parameters
@@ -189,7 +189,8 @@ def _train_multi_device(symbol, ctx, arg_names, param_names, aux_names,
                                                    arg_names=arg_names,
                                                    aux_names=aux_names,
                                                    work_load_list=work_load_list,
-                                                   logger=logger)
+                                                   logger=logger,
+                                                   group2ctx=group2ctx)
     if monitor:
         executor_manager.install_monitor(monitor)
 
@@ -689,7 +690,7 @@ class FeedForward(BASE_ESTIMATOR):
 
     def fit(self, X, y=None, eval_data=None, eval_metric='acc',
             epoch_end_callback=None, batch_end_callback=None, kvstore='local', logger=None,
-            work_load_list=None, monitor=None, eval_batch_end_callback=None):
+            work_load_list=None, monitor=None, eval_batch_end_callback=None, group2ctx=None):
         """Fit the model.
 
         Parameters
@@ -781,7 +782,8 @@ class FeedForward(BASE_ESTIMATOR):
                             kvstore=kvstore, update_on_kvstore=update_on_kvstore,
                             logger=logger, work_load_list=work_load_list, monitor=monitor,
                             eval_batch_end_callback=eval_batch_end_callback,
-                            sym_gen=self.sym_gen)
+                            sym_gen=self.sym_gen,
+                            group2ctx=group2ctx)
 
 
     def save(self, prefix, epoch=None):
