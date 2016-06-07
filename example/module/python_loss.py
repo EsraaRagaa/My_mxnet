@@ -1,11 +1,11 @@
 # pylint: skip-file
 import numpy as np
 import mxnet as mx
-import numba
+#import numba
 import logging
 
 # We use numba.jit to implement the loss gradient.
-@numba.jit
+#@numba.jit
 def mc_hinge_grad(scores, labels):
     scores = scores.asnumpy()
     labels = labels.asnumpy()

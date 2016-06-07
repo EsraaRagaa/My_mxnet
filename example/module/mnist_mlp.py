@@ -11,7 +11,7 @@ act2 = mx.symbol.Activation(fc2, name='relu2', act_type="relu")
 fc3 = mx.symbol.FullyConnected(act2, name='fc3', num_hidden=10)
 softmax = mx.symbol.SoftmaxOutput(fc3, name = 'softmax')
 
-n_epoch = 2
+n_epoch = 20
 batch_size = 100
 train_dataiter = mx.io.MNISTIter(
         image="../image-classification/mnist/train-images-idx3-ubyte",

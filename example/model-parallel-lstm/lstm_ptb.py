@@ -50,7 +50,7 @@ batch_size = 20
 seq_len = 35
 num_hidden = 400
 num_embed = 200
-num_lstm_layer = 2
+num_lstm_layer = 4
 num_round = 25
 learning_rate= 0.1
 wd=0.
@@ -67,8 +67,7 @@ print("Vocab=%d" %vocab)
 
 X_train_batch = drop_tail(X_train_batch, seq_len)
 X_val_batch = drop_tail(X_val_batch, seq_len)
-ngpu=1
-ngpu = 1
+ngpu = 2
 # A simple two GPU placement plan
 group2ctx = {'embed': mx.gpu(0),
              'decode': mx.gpu(ngpu - 1)}
